@@ -50,9 +50,12 @@ int insertBits(int n, int a, int b, int k) {
     unsigned int dataValue = 0;
     unsigned int leftShiftCnt = b + 1;
     unsigned int rightShiftCnt = 32 - a;
-    
-    rightShift = allOnes >> (rightShiftCnt);
-    leftShift = allOnes << (leftShiftCnt);
+
+    if(rightShiftCnt == 32) rightShift = 0;
+    else rightShift = allOnes >> (rightShiftCnt);
+
+    if(leftShiftCnt == 32) leftShift = 0;
+    else leftShift = allOnes << (leftShiftCnt);
     dataValue = k << a;
 
     return ((n&(rightShift | leftShift)) | dataValue);
